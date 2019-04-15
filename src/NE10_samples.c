@@ -55,13 +55,14 @@ static void my_test(void){
     thecst = (ne10_float32_t) rand()/RAND_MAX*5.0f;  
 
     struct timespec start, end;
+    uint64_t elapsed_us;
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
     for (i=0;i<100000;i++) {
         ne10_addc_float_c( thedst1 , thesrc, thecst, 15 );     
     }
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
-    uint64_t elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
+    elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
     printf("ne10_addc_float_c() elapsed %lu ms\n", elapsed_us / 1000);
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
@@ -69,7 +70,7 @@ static void my_test(void){
         ne10_addc_float_neon( thedst2 , thesrc, thecst, 15 );
     }
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
-    uint64_t elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
+    elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
     printf("ne10_addc_float_c() elapsed %lu ms\n", elapsed_us / 1000);
 
 
@@ -78,7 +79,7 @@ static void my_test(void){
         ne10_addc_float_asm( thedst3 , thesrc, thecst, 15 );
     }
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
-    uint64_t elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
+    elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
     printf("ne10_addc_float_c() elapsed %lu ms\n", elapsed_us / 1000);
 
     printf("==========my_test() end=========\n");   
