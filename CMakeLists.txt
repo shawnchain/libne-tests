@@ -13,4 +13,4 @@ INCLUDE_DIRECTORIES(${libne_include_dir})
 file(GLOB_RECURSE SOURCES_C src/*.c)
 
 ADD_EXECUTABLE(libne-tests ${SOURCES_C})
-TARGET_LINK_LIBRARIES(libne-tests NE10 m)
+TARGET_LINK_LIBRARIES(libne-tests ${libne} m)
