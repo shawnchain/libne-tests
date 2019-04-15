@@ -14,3 +14,5 @@ file(GLOB_RECURSE SOURCES_C src/*.c)
 
 ADD_EXECUTABLE(libne-tests ${SOURCES_C})
 TARGET_LINK_LIBRARIES(libne-tests ${libne} m)
+
+INSTALL(TARGETS libne-tests)
