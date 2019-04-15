@@ -61,7 +61,7 @@ int matrix_multiply_sample_main(void)
 
     struct timespec start, end;
     uint64_t elapsed_us;
-    int loops = 5000000;
+    int i=0, loops = 5000000;
 
     // Perform the multiplication of the matrices in `src` by those in `mul`
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
