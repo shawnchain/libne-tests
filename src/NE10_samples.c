@@ -74,9 +74,9 @@ static void my_test(void){
     }
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
     elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
-    printf("ne10_addc_float_c() elapsed %lu ms\n", elapsed_us / 1000);
+    printf("ne10_addc_float_neon() elapsed %lu ms\n", elapsed_us / 1000);
 
-
+/*
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
     for (i=0;i<loops;i++) {
         ne10_addc_float_asm( thedst3 , thesrc, thecst, 15 );
@@ -84,7 +84,7 @@ static void my_test(void){
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
     elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
     printf("ne10_addc_float_c() elapsed %lu ms\n", elapsed_us / 1000);
-
+*/
     printf("==========my_test() end=========\n");   
 }
 
