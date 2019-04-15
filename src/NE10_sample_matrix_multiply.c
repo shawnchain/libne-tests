@@ -60,7 +60,7 @@ int matrix_multiply_sample_main(void)
     }
 
     struct timespec start, end;
-    uint64_t elapsed_us;
+    uint64_t elapsed_ms;
     int i=0, loops = 5000000;
 
     // Perform the multiplication of the matrices in `src` by those in `mul`
@@ -69,16 +69,16 @@ int matrix_multiply_sample_main(void)
         ne10_mulmat_3x3f_c(dst, src, mul, MATRICES);
     }
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
-    elapsed_us = (end.tv_sec - start.tv_sec) * 1000 + (end.tv_nsec - start.tv_nsec) / 1000000;
-    printf("*** ne10_mulmat_3x3f_c() elapsed %llu ms\n", elapsed_us);
+    elapsed_ms = (end.tv_sec - start.tv_sec) * 1000 + (end.tv_nsec - start.tv_nsec) / 1000000;
+    printf("*** ne10_mulmat_3x3f_c() elapsed %llu ms\n", elapsed_ms);
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
     for (i=0;i<loops;i++) {
         ne10_mulmat_3x3f_neon(dst, src, mul, MATRICES);
     }
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
-    elapsed_us = (end.tv_sec - start.tv_sec) * 1000 + (end.tv_nsec - start.tv_nsec) / 1000000;
-    printf("*** ne10_mulmat_3x3f_neon() elapsed %llu ms\n", elapsed_us);
+    elapsed_ms = (end.tv_sec - start.tv_sec) * 1000 + (end.tv_nsec - start.tv_nsec) / 1000000;
+    printf("*** ne10_mulmat_3x3f_neon() elapsed %llu ms\n", elapsed_ms);
 
     // Display the results (src[i] * mul[i] == dst[i])
     for (int i = 0; i < MATRICES; i++)
