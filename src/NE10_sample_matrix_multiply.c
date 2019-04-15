@@ -26,6 +26,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "NE10.h"
 
@@ -58,8 +59,26 @@ int matrix_multiply_sample_main(void)
         initialise_matrix(&mul[i]);
     }
 
+    struct timespec start, end;
+    uint64_t elapsed_us;
+    int loops = 5000000;
+
     // Perform the multiplication of the matrices in `src` by those in `mul`
-    ne10_mulmat_3x3f(dst, src, mul, MATRICES);
+    clock_gettime(CLOCK_MONOTONIC_RAW, &start);
+    for (i=0;i<loops;i++) {
+        ne10_mulmat_3x3f_c(dst, src, mul, MATRICES);
+    }
+    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+    elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
+    printf("*** ne10_mulmat_3x3f_c() elapsed %lu ms\n", elapsed_us / 1000);
+
+    clock_gettime(CLOCK_MONOTONIC_RAW, &start);
+    for (i=0;i<loops;i++) {
+        ne10_mulmat_3x3f_neon(dst, src, mul, MATRICES);
+    }
+    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+    elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
+    printf("*** ne10_mulmat_3x3f_neon() elapsed %lu ms\n", elapsed_us / 1000);
 
     // Display the results (src[i] * mul[i] == dst[i])
     for (int i = 0; i < MATRICES; i++)
