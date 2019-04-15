@@ -42,7 +42,7 @@ int             fir_sample_main(void);
  * Note that this will call `ne10_init` multiple times unnecessarily, as each sample is
  * supposed to be an isolated illustration of how to use a certain part of Ne10.
  */
-int main(void)
+int main(int argc, char **argv)
 {
     printf("==== Ne10 Samples ===\n\n");
 
