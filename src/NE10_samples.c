@@ -58,7 +58,7 @@ static void my_test(void){
     struct timespec start, end;
     uint64_t elapsed_us;
 
-    int loops = 100000
+    int loops = 100000;
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
     for (i=0;i<loops;i++) {
