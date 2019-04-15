@@ -58,8 +58,10 @@ static void my_test(void){
     struct timespec start, end;
     uint64_t elapsed_us;
 
+    int loops = 100000
+
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
-    for (i=0;i<100000;i++) {
+    for (i=0;i<loops;i++) {
         ne10_addc_float_c( thedst1 , thesrc, thecst, 15 );     
     }
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
@@ -67,7 +69,7 @@ static void my_test(void){
     printf("ne10_addc_float_c() elapsed %lu ms\n", elapsed_us / 1000);
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
-    for (i=0;i<100000;i++) {
+    for (i=0;i<loops;i++) {
         ne10_addc_float_neon( thedst2 , thesrc, thecst, 15 );
     }
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
@@ -76,7 +78,7 @@ static void my_test(void){
 
 
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
-    for (i=0;i<100000;i++) {
+    for (i=0;i<loops;i++) {
         ne10_addc_float_asm( thedst3 , thesrc, thecst, 15 );
     }
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
