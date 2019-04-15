@@ -37,6 +37,7 @@ int        real_fft_sample_main(void);
 int             fir_sample_main(void);
 
 #include <sys/time.h>
+#include <time.h>
 
 static void my_test(void){
     printf("==========my_test() begin=========\n");   
